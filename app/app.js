@@ -144,7 +144,9 @@ function createOrder(req, res) {
     })
 
     console.log(`data : ${data}`)
-    
+    console.log(`hostname : ${hostname}`)
+    console.log(`port : ${port}`)
+
     const options = {
         hostname: hostname,
         port: port,
