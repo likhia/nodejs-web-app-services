@@ -17,11 +17,11 @@ var app = express();
 
 var banner = "<img src=\"https://images.unsplash.com/photo-1445205170230-053b83016050?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80\" width=\"900\" height=\"200\"><br>";
 
-var color = process.env.COLOR || 'black';
+var color = process.env.COLOR || 'lightgrey';
    
 var css = "<head><style>";
-css = css + "body {background-color: lightgray;}"
-css = css+ "label   {color: " + color + "; font:arial}";
+css = css + "body {background-color: " + color  + ";}"
+css = css+ "label   {color: black; font:arial}";
 css = css + "</style></head><br>";
 
 let responseContent = '';
@@ -34,64 +34,66 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-   var endpoint = process.env.ENDPOINT || 'https://routelyh124fx-opentlc-mgr-codeready.apps.cluster-1ec0.1ec0.sandbox1350.opentlc.com/'
-
+   var endpoint = process.env.ENDPOINT || 'https://routevpl6rir8-opentlc-mgr-codeready.apps.cluster-2e68.2e68.sandbox1783.opentlc.com/'
    var script = "<script>";
-   script = script + "function getTotalPrice() {";
-   script = script + "   var qty = document.getElementById(\"qty\");";
-   script = script + "   selectedQty = qty.options[qty.selectedIndex].value;";
-   script = script + "   var product = document.getElementById(\"product\");";
-   script = script + "   selectedProduct = product.options[product.selectedIndex].value;";
-   script = script + "   if (selectedProduct.startsWith(\"D\")) {";
-   script = script + "        document.getElementById(\"totalprice\").value = selectedQty * 30.00;";
-   script = script + "        document.getElementById(\"unitprice\").value = 30.00;";
-   script = script + "    } else { ";
-   script = script + "        document.getElementById(\"totalprice\").value = selectedQty * 10.00;";
-   script = script + "        document.getElementById(\"unitprice\").value = 10.00;";
-   script = script + "    } ";
-   script = script + "}";
-   script = script + "function validate() {";
-   script = script + "   if (document.getElementById(\"totalprice\").value == 0) { "
-   script = script + "      alert(\"Quantity must be > 0.\");";
-   script = script + "      return false;";
-   script = script + "   }";
-   script = script + "   return true;";
-   script = script + "}";
    script = script + "</script>";
 
 
    //var banner = "<img src=\"https://images.unsplash.com/photo-1445205170230-053b83016050?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80\" width=\"900\" height=\"200\"><br>";
    var content = "<html>" + css + script + banner;
 
-   var product = "<select id=\"product\" name=\"product\" onchange=\"getTotalPrice()\">";
-   product = product + "<option value=\"\">Please select</option>";
-   product = product + "<option value=\"D001\">D001 - Office Dress 1</option>";
-   product = product + "<option value=\"D002\">D002 - Office Dress 2</option>";
-   product = product + "<option value=\"D003\">D003 - Office Dress 3</option>";
-   product = product + "<option value=\"T001\">T001 - White Top 1</option>";
-   product = product + "<option value=\"T101\">T101 - Blue Top 1</option>";
-   product = product + "<option value=\"T201\">T201 - Black Top 1</option>";
-   product = product + "</select>";
+   var model = "<select id=\"model\" name=\"model\">";
+   model = model + "<option value=\"Vios\">Toyota Vios</option>";
+   model = model + "<option value=\"Wish\">Toyota Wish</option>";
+   model = model + "<option value=\"Mazda3\">Mazda 3</option>";
+   model = model + "<option value=\"Fit\">Honda Fit</option>";
+   model = model + "<option value=\"City\">Honda City</option>";
+   model = model + "</select>";
 
-   var qty = "<select id=\"qty\" name=\"qty\" onchange=\"getTotalPrice()\">";
-   qty = qty + "<option value=\"0\">0</option>";
-   qty = qty + "<option value=\"1\">1</option>";
-   qty = qty + "<option value=\"2\">2</option>";
-   qty = qty + "<option value=\"3\">3</option>";
-   qty = qty + "</select>";
+   var color = "<select id=\"color\" name=\"color\">";
+   color = color + "<option value=\"BLACK\">BLACK</option>";
+   color = color + "<option value=\"WHITE\">WHITE</option>";
+   color = color + "<option value=\"BLUE\">BLUE</option>";
+   color = color + "<option value=\"GREY\">GREY</option>";
+   color = color + "<option value=\"RED\">RED</option>";
+   color = color + "</select>";
+
+   var engine = "<select id=\"engine\" name=\"engine\">";
+   engine = engine + "<option value=\"1.2\">1.2</option>";
+   engine = engine + "<option value=\"1.5\">1.5</option>";
+   engine = engine + "<option value=\"1.6\">1.6</option>";
+   engine = engine + "<option value=\"2.0\">2.0</option>";
+   engine = engine + "</select>";
+
+   var createdYr = "<select id=\"createdyr\" name=\"createdyr\">";
+   createdYr = createdYr + "<option value=\"2021\">2021</option>";
+   createdYr = createdYr + "<option value=\"2020\">2020</option>";
+   createdYr = createdYr + "<option value=\"2019\">2019</option>";
+   createdYr = createdYr + "</select>";
+
+   var type = "<select id=\"type\" name=\"type\">";
+   type = type + "<option value=\"NORMAL\">Normal</option>";
+   type = type + "<option value=\"WEEKEND\">Weekend</option>";
+   type = type + "</select>";
 
    content = content + "<body><p>";
    content = content + "<form action = \"" + endpoint + "process_post\" method = \"POST\">";
    content = content + "<table width=\"20%\">"
-   content = content + "<tr><td><label for=\"lfn\">Product </label> : </td> <td>" + product +  "</td></tr>";
+   content = content + "<tr><td><label for=\"lfn\">Model </label> : </td> <td>" + model +  "</td></tr>";
    content = content + "<tr><td colspan=\"2\"></td></tr>";
-   content = content + "<tr><td><label for=\"lln\">Quantity </label>: </td> <td>" + qty + "</td></tr>";
+   content = content + "<tr><td><label for=\"lln\">Color </label>: </td> <td>" + color + "</td></tr>";
    content = content + "<tr><td colspan=\"2\"></td></tr>";
-   content = content + "<tr><td><label for=\"lln\">Price </label>: </td> <td><input type = \"text\" id = \"unitprice\" name = \"unitprice\" readonly></td></tr>";
+   content = content + "<tr><td><label for=\"lln\">Engine Capacity </label>: </td> <td>" + engine + "</td></tr>";
    content = content + "<tr><td colspan=\"2\"></td></tr>";
-   content = content + "<tr><td><label for=\"lln\">Total Price </label>: </td> <td><input type = \"text\" id = \"totalprice\" name = \"price\" readonly></td></tr>";
+   content = content + "<tr><td><label for=\"lln\">Created Year </label>: </td> <td>" + createdYr + "</td></tr>";
    content = content + "<tr><td colspan=\"2\"></td></tr>";
-   content = content + "<tr><td colspan=\"2\"><input type = \"submit\" name=\"submit\" value = \"Order Now\" onclick=\"return validate()\"></td></tr>";
+   content = content + "<tr><td><label for=\"lln\">Type </label>: </td> <td>" + type + "</td></tr>";
+   content = content + "<tr><td colspan=\"2\"></td></tr>";
+   content = content + "<tr><td><label for=\"lln\">Used Vehicle </label>: </td> <td><input type = \"checkbox\" id =\"used\" name = \"used\"></td></tr>";
+   content = content + "<tr><td colspan=\"2\"></td></tr>";
+   content = content + "<tr><td><label for=\"lln\">User </label>: </td> <td><input type = \"text\" id = \"user\" name = \"user\"></td></tr>";
+   content = content + "<tr><td colspan=\"2\"></td></tr>";
+   content = content + "<tr><td colspan=\"2\"><input type = \"submit\" name=\"submit\" value = \"Submit\"></td></tr>";
    content = content + "</form>"
    content = content + "</body></html>";
 
@@ -101,16 +103,8 @@ app.get('/', function (req, res) {
 })
 
 app.post('/process_post', urlencodedParser, function (req, res) {
-   // Prepare output in JSON format
-   response = {
-      product:req.body.product,
-      quantity: req.body.qty,
-      price:req.body.price
-   };
 
-   createOrder(req,res);
-
-   //res.end(JSON.stringify(response));
+   createOrder(req,res);   
 })
 
 function getResponseContent(reply) {
@@ -122,28 +116,39 @@ function getResponseContent(reply) {
     return content;
 }
 
-function setVal(orderId, res) {
-    responseContent = "The order (" + orderId + ") is completed. Seller has proceed with the delivery.";
+function setVal(carplate, res) {
+    responseContent = carplate + " is the assigned car plate number.";
     res.end(getResponseContent(responseContent));
 }
 
 function createOrder(req, res) {
     const http = require('http')
 
-    var hostname = process.env.HOSTNAME || 'acceptorder.orders.svc.cluster.local'
+    
+    var hostname = process.env.HOSTNAME || 'workshop-main.service.svc.cluster.local'
     var port = process.env.PORT || '8080'
 
+    var used = "true";
+    if (req.body.used == null) {
+        used = "false";
+    }
+
     const data = JSON.stringify({
-        'orderId' : '',
-        'price' : req.body.price,
-        'quantity': req.body.qty,
-        'status' : ''
+        'model' : req.body.model,
+        'color' : req.body.color,
+        'type' : req.body.type,
+        'engineCapacity' : req.body.engine,
+        'createdYear': req.body.createdyr,
+        'user' : req.body.user,
+        'used' : used
     })
 
+    console.log(`data : ${data}`)
+    
     const options = {
         hostname: hostname,
         port: port,
-        path: '/order/accept',
+        path: '/api/service/registervehicle',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -157,22 +162,19 @@ function createOrder(req, res) {
         console.log(`statusCode: ${res2.statusCode}`)
 
         if (res2.statusCode != 200) {
-            if(res2.statusCode == 504) {
-                res.end(getResponseContent("The order has failed to proceed due to timeout.  Please try again."));
-            } else {
-                res.end(getResponseContent("The order has failed to proceed.  Please try again."));
-            }
-            
+            res.end(getResponseContent("The request has failed.  Please try again."));
         }
 
         res2.on('data', d => {
             process.stdout.write(d)
 
             if (res2.statusCode == 200) {
-                var result = JSON.parse(d)
-                setVal(result.orderId,res);
+                //var result = JSON.parse(d)
+                
+                //setVal(result,res);
+                setVal(d,res);
             } else {
-                res.end(getResponseContent("The order has failed to proceed.  Please try again."));
+                res.end(getResponseContent("The request has failed.  Please try again."));
             }
                
         })
