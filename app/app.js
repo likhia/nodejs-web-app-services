@@ -15,7 +15,7 @@
 var express = require('express');
 var app = express();
 
-var banner = "<img src=\"https://images.unsplash.com/photo-1445205170230-053b83016050?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80\" width=\"900\" height=\"200\"><br>";
+//var banner = "<img src=\"https://images.unsplash.com/photo-1445205170230-053b83016050?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80\" width=\"900\" height=\"200\"><br>";
 
 var color = process.env.COLOR || 'lightgrey';
    
@@ -31,7 +31,8 @@ var bodyParser = require('body-parser');
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.use(express.static('public'));
+//app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 
 app.get('/', function (req, res) {
    var endpoint = process.env.ENDPOINT || 'https://routevpl6rir8-opentlc-mgr-codeready.apps.cluster-2e68.2e68.sandbox1783.opentlc.com/'
@@ -39,7 +40,7 @@ app.get('/', function (req, res) {
    script = script + "</script>";
 
 
-   //var banner = "<img src=\"https://images.unsplash.com/photo-1445205170230-053b83016050?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80\" width=\"900\" height=\"200\"><br>";
+   var banner = "<img src=\"images/cars.png\" width=\"900\" height=\"200\"><br>";
    var content = "<html>" + css + script + banner;
 
    var model = "<select id=\"model\" name=\"model\">";
