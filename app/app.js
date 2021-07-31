@@ -15,9 +15,9 @@
 var express = require('express');
 var app = express();
 
-//var banner = "<img src=\"https://images.unsplash.com/photo-1445205170230-053b83016050?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2xvdGhpbmd8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80\" width=\"900\" height=\"200\"><br>";
+var banner = "<img src=\"images/cars.png\" width=\"900\" height=\"200\"><br>";
 
-var color = process.env.COLOR || 'lightgrey';
+var color = process.env.COLOR || 'white';
    
 var css = "<head><style>";
 css = css + "body {background-color: " + color  + ";}"
@@ -40,8 +40,9 @@ app.get('/', function (req, res) {
    script = script + "</script>";
 
 
-   var banner = "<img src=\"images/cars.png\" width=\"900\" height=\"200\"><br>";
    var content = "<html>" + css + script + banner;
+   content = content + "<p><h3>Register New Vehicle</h3>";
+
 
    var model = "<select id=\"model\" name=\"model\">";
    model = model + "<option value=\"Vios\">Toyota Vios</option>";
