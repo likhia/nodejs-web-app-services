@@ -67,3 +67,4 @@ commands:
               }
             ]
           }
+        type: vscode-launch
